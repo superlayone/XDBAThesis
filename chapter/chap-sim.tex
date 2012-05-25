@@ -1,0 +1,129 @@
+
+\chapter{$MSPB^2C$的实现与评估}
+\label{chap:sim}
+\section{$MSPB^2C$实现平台}
+\subsection{硬件平台}
+本实验在Lenovo$^\circledR$ Y450 T6600 2.1GHz,2GB RAM 机器上测试。
+\subsection{软件平台}
+本实验在以下软件平台上完成：
+
+（1）Microsoft$^\circledR$ Windows$^\circledR$ 7 SP1 32bit（English）
+
+（2）Weka Machine Learning Software V3
+
+（3）Matlab$^\circledR$ R2012a
+
+Weka\cite{Weka}的全名是怀卡托知识分析环境（Waikato Environment for Knowledge Analysis），是一款免费的，基于JAVA 环境下开源的机器学习（Machine Learning）以及数据挖掘（Data Minining）软件。Weka是新西兰怀卡托大学（University of Waikato）开发的数据挖掘实验平台，目前仍然在项目主页进行维护与更新。Weka的主界面如图\ref{Weka}所示。
+ \begin{figure}[tbh]
+ \centering
+ \includegraphics[width=0.7\textwidth]{Weka}
+ \caption{Weka知识分析软件的主界面}
+ \label{Weka}
+\end{figure}
+\section{测试过程}
+\subsection{任务概述}
+本实验对三种不同的资源权值分布特征进行分类，假设监控的数据分别是$R_i$=$\{r_{i1},r_{i2},\dots,r_{in}\}$，这三种权值\cite{dataclass}分别是：
+
+（1）$d_1$=0.8，$d_2$=$d_3$=0.05
+
+（2）$d_1$=0.6，$d_2$=$d_3$=0.1
+
+（3）$d_1$=0.4，$d_2$=$d_3$=0.15
+
+（4）$d_1$=0.2，$d_2$=0.2，$d_3$=0.3
+
+（5）$d_1$=0.1，$d_2$=0.5，$d_3$=0.1
+
+对于第（1）类，表示计算密集型的任务居多，如数值计算、数据挖掘分析等；第（2）、（3）类表示需求均衡类的任务表示，其中第（2）类CPU资源需求强于其它类的计算任务；第（4）类表示I/O型任务；第（5）类表示内存需求较高的任务，Weka的聚类分析如图\ref{cluster}所示。
+ \begin{figure}[tbh]
+ \centering
+ \includegraphics[width=0.8\textwidth]{cluster}
+ \caption{Weka聚类分析结果}
+ \label{cluster}
+\end{figure}
+\subsection{测试结果}
+通过Weka聚类分析，我们获得一个较理想的、符合实际意义的数据分布图，其任务需求曲线如图\ref{dataset2}所示，其中第4幅图的方框表示大部分的数据落入到此区域。通过对训练集的归类，本文给出三个类别标签，分别是A：代表CPU密集型任务；B：内存密集型任务；C：I/O密集型任务；D：普通类任务。
+ \begin{figure}[tbh]
+ \centering
+ \includegraphics[width=1.0\textwidth]{dataset2}
+ \caption{典型的虚拟环境下任务曲线}
+ \label{dataset2}
+\end{figure}
+
+由如下公式可计算出分类的先验概率：
+
+\begin{equation}
+P(c)=\frac{NumOf(c)}{Total};c \in\{A,B,C\}
+\end{equation}
+
+因此，P（A）=0.16，P（B）=0.05，P（C）=0.09，P（D）=0.70。仿真中分别以1、2、3、4代表A、B、C、D类别，如图\ref{bayes1} 所示的是由100 组数据训练的结果。
+ \begin{figure}[tbh]
+ \centering
+ \includegraphics[width=1.0\textwidth]{bayes1}
+ \caption{由测试数据集而得的分类结果}
+ \label{bayes1}
+\end{figure}
+
+如图\ref{bayes2}所示，测试100组任务请求数据而得到的数据。
+ \begin{figure}[tbh]
+ \centering
+ \includegraphics[width=1.0\textwidth]{bayes2}
+ \caption{对100组任务请求数据集分类的结果}
+ \label{bayes2}
+\end{figure}
+
+从图中可以看出，任务分布也遵从类似高斯分布的特征，对资源需求密集的任务属于少数，大多数任务属于普通类。柱状图的矩阵代表正确分类与否的个数，利用公式（3-5）可以求得正确分类的百分比。同时，该矩阵还用来求得下一节定义的收益函数。
+\subsection{测试结果评估分析}
+分类后的任务请求，经过一个重新组合的过程，可以形成一个更优的组态。然后在此基础上重新分配任务请求的去向，如图\ref{recombin}所示。
+ \begin{figure}[tbh]
+ \centering
+ \includegraphics[width=0.9\textwidth]{recombin}
+ \caption{分类后的任务请求分配过程}
+ \label{recombin}
+\end{figure}
+
+假设虚拟环境下有多种任务，也有多种任务分配算法。而目前的算法都有针对的特定应用环境，比如LRU解决CPU密集型、带有BOOST 特性的Credit算法具有针对I/O的优化、DRF算法具有公平的性质，能够最大化的共享资源、针对内存优化的调度算法。
+
+\begin{defn}
+每类算法对其特定的情况，定义其收益为1，否则收益为0.8，忽略请求列表的变更代价。假设有n个任务请求$t$=$\{t_1,t_2,\dots,t_n\}$，收益函数定义如公式\ref{profit}所示。
+\end{defn}
+
+\begin{equation}
+\label{profit}
+Cost=\sum\limits_{i=1}^n T(i)
+\end{equation}
+
+其中：
+
+\begin{equation}
+T(i)=\left\{
+\begin{array}{ll}
+1,\quad \ \ $适用于任务i的算法$\\
+0.8,\quad $其它$
+\end{array}
+\right.
+\end{equation}
+
+则单一调度分配算法平台的收益和$MSPB^2C$收益的对比如图\ref{CMP}所示：
+
+ \begin{figure}[tbh]
+ \centering
+ \includegraphics[width=0.85\textwidth]{CMP}
+ \caption{单一调度分配算法和$MSPB^2C$的收益对比}
+ \label{CMP}
+\end{figure}
+
+如图\ref{CMP}所示，$MSPB^2C$有着更高的收益，代表着有更高的系统平均利用率。A、B、C、D分别有着83.2、81、81.8、94 的收益，而本文提出的$MSPB^2C$有着96.4的收益，而且随着任务请求曲线（类高斯分布曲线）的逐渐平坦，$MSPB^2C$会获得更高的收益，如图\ref{CMP2}所示。
+
+ \begin{figure}[tbh]
+ \centering
+ \includegraphics[width=0.85\textwidth]{CMP2}
+ \caption{单一调度分配算法和$MSPB^2C$的收益对比（随着资源分布的均衡）}
+ \label{CMP2}
+\end{figure}
+\subsection{结论}
+从实验的数据我们可以看出，根据不同的任务请求，结合不同算法的不同标准得到一个最优的部署是可能和合理的。而且这种需求是现实存在的，我们可以通过这种组合获得性能上的提升、体系架构的智能化发展等等。
+
+通过实验可知，针对不同的应用背景，使用合适的算法进行调度是比原有策略更好的一个决策。
+\section{本章小结}
+本章分别介绍了实现测试的软硬件平台、测试过程。通过测试得到的数据和图，从实验角度分析了系统的可行性，并对本系统的核心模块— 预测和分类模块同以往没有使用融合预测调度的系统收益进行了比较，评估了测试结果，并获得了预期的结果。最后对本次测试做出了总结。

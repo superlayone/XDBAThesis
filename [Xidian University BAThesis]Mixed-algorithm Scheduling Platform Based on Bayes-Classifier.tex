@@ -1,0 +1,58 @@
+%% Bachelor Thesis Template of Xidian Uniersity
+%%   for using XDBAthesis package with LaTeX
+%%
+%% Created by Xue-Jilong(xuejilong@gmail.com)
+%%
+%% template.tex v0.1, 2011/03/21
+
+
+\documentclass[dvips]{XDBAthesis}
+% 选项说明：
+% dvipdfm  使用 dvipdfm(x) 生成最终的 PDF 文档 (缺省设置）
+% dvips    使用 dvips 生成最终的 PS 文档
+% pdftex   使用 pdfLaTeX 生成最终的 PDF 文档
+
+% 图形文件的搜索路径
+\graphicspath{{chapter/}{figures/}}
+\renewcommand{\theequation}{\thechapter-\arabic{equation}}
+\makeatletter
+\def\tagform@#1{\maketag@@@{式\ignorespaces(#1)\unskip\@@italiccorr}}
+\makeatother
+
+\begin{document}
+%%----------------- 封面部分 ----------------- %%
+    \class{3-0891}
+    \schoolnumber{03089013}
+    \title{虚拟计算平台资源调度系统的}{设计与实现}   %%题目超过14个字把剩下的放到第二个空
+    \college{计算机学院}
+    \major{计算机科学与技术}
+    \author{王力}
+    \advisor{马建峰}
+    \maketitle
+
+%%----------------- 前言部分 ----------------- %%
+    \frontmatter
+    \include{chapter/abstract}
+    \tableofcontents
+
+%%----------------- 正文部分 ----------------- %%
+    \mainmatter
+    \pagestyle{content}
+    \include{chapter/chap-intro}
+    \include{chapter/chap-develop}
+    \include{chapter/chap-model}
+    \include{chapter/chap-sim}
+    \include{chapter/chap-faq}
+
+%%------    \appendix-------------------------%%
+%%------    \include{chapter/chap-req}--------%%
+
+%%----------------- 附件部分 ----------------- %%
+    \backmatter
+    \include{chapter/thanks}
+    \include{chapter/bib}
+
+\end{document}
+
+
+
