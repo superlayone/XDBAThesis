@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2012.5.8)  24 MAY 2012 16:33
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2012.5.8)  25 MAY 2012 11:25
 entering extended mode
 **[Xidian*University*BAThesis]Mixed-algorithm*Scheduling*Platform*Based*on*Baye
 s-Classifier.tex
@@ -1042,13 +1042,13 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 ]
 LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 32.
-
-Underfull \hbox (badness 1888) in paragraph at lines 93--96
-\OT1/cmr/m/n/10.5 el of In-tel-li-gence Ma-chines.  Proc.Conference of Robotic-
-s and Au-toma-tion,San
+ [33]
+Underfull \hbox (badness 5622) in paragraph at lines 103--106
+[][]\OT1/cmr/m/n/10.5 Margaret H.Dunham.  Da-ta Min-ing In-tro-duc-to-ry and Ad
+-vanced Top-ic-s[M].
  []
 
-[33]) [34]
+) [34]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 55.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
 
@@ -1076,4 +1076,4 @@ Here is how much of TeX's memory you used:
  47i,14n,51p,4188b,1158s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on "[Xidian University BAThesis]Mixed-algorithm Scheduling Platf
-orm Based on Bayes-Classifier.dvi" (40 pages, 257076 bytes).
+orm Based on Bayes-Classifier.dvi" (40 pages, 257136 bytes).
