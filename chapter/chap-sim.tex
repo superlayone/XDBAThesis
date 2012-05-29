@@ -1,26 +1,99 @@
 
-\chapter{$MSPB^2C$的实现与评估}
+\chapter{$BMVS^2$的实现与测试}
 \label{chap:sim}
-\section{$MSPB^2C$实现平台}
-\subsection{硬件平台}
-本实验在Lenovo$^\circledR$ Y450 T6600 2.1GHz,2GB RAM 机器上测试。
-\subsection{软件平台}
-本实验在以下软件平台上完成：
-
-（1）Microsoft$^\circledR$ Windows$^\circledR$ 7 SP1 32bit（English）
-
-（2）Weka Machine Learning Software V3
-
-（3）Matlab$^\circledR$ R2012a
-
-Weka\cite{Weka}的全名是怀卡托知识分析环境（Waikato Environment for Knowledge Analysis），是一款免费的，基于JAVA 环境下开源的机器学习（Machine Learning）以及数据挖掘（Data Minining）软件。Weka是新西兰怀卡托大学（University of Waikato）开发的数据挖掘实验平台，目前仍然在项目主页进行维护与更新。Weka的主界面如图\ref{Weka}所示。
+\section{$BMVS^2$的实现}
+$BMVS^2$的调度实现如\ref{optflow}所示。
  \begin{figure}[tbh]
  \centering
- \includegraphics[width=0.7\textwidth]{Weka}
- \caption{Weka知识分析软件的主界面}
- \label{Weka}
+ \includegraphics[width=0.8\textwidth]{optflow}
+ \caption{$BMVS^2$执行过程}
+ \label{optflow}
 \end{figure}
-\section{测试过程}
+\\$\bullet$ \textbf{BMVS2\_FetchRequest()}函数
+
+首先，BMVS2\_FetchRequest()函数从监控器获得任务请求数据，然后经过平移极差公式（3-7）进行归一化操作，返回一个经过归一化的请求数据。然后，归一化的数据传给分类器函数。
+
+\begin{lstlisting}[frame=lines]
+void BMVS2_FetchRequest(int ReqNum,Request *Req,Request *FormattedReq)
+{
+     //计算平移极差
+     int _CPU=Max(Req)-Min(Req);
+     int _IO=Max(Req)-Min(Req);
+     int _MEM=Max(Req)-Min(Req);
+     for(int i=0;i<ReqNum;i++)
+     {
+             FormattedReq[i].CPU=(FormattedReq[i].CPU-min(Req.CPU))/_CPU;
+             FormattedReq[i].IO=(FormattedReq[i].IO-min(Req.IO))/IO;
+             FormattedReq[i].MEM=(FormattedReq[i].MEM-min(Req.MEM))/MEM;
+     }
+}
+\end{lstlisting}
+$\bullet$ \textbf{BMVS2\_Classify()}函数
+
+BMVS2\_Classify()获取已经预处理的数据，然后从BMVS2\_FetchDatabase()函数获得分类标签，分类的结果是给每个人物请求的BelongedClass成员赋值。
+
+\begin{lstlisting}[frame=lines]
+     //分类
+     O2 = NaiveBayes.fit(Data,Class,'dist',{'kernel','normal','kernel'});
+     C2 = O2.predict(Data);
+     cMat2 = confusionmat(Dlass,C2);
+\end{lstlisting}
+\begin{lstlisting}[frame=lines]
+void BMVS2_Classify(int ReqNum,Request *FormattedReq)
+{
+     Classify(FormattedReq);
+     for(int i=0;i<ReqNum;i++)
+     {
+             FormattedReq.BelongedClass=BelongedTo[i];
+     }
+}
+\end{lstlisting}
+$\bullet$ \textbf{BMVS2\_Sched()}函数
+
+BMVS2\_Sched()获得分类的结果，对应各个分类预先设定的调度算法。
+\begin{lstlisting}[frame=lines]
+void BMVS2_Sched(int ReqNum,Request *FormattedReq)
+{
+     TaskList *A,*B,*C,*D;
+     int CountA=0,CountB=0,CountC=0,CountD=0;
+     for(int i=0;i<ReqNum;i++)
+     {
+             if(FormattedReq[i].BelongedClass==1)
+             {
+                    A[CountA++].BelongedClass=i;
+             }
+             ...
+             //继续划分其它三类的任务编号
+             ...
+     }
+}
+\end{lstlisting}
+%Weka\cite{Weka}的全名是怀卡托知识分析环境（Waikato Environment for Knowledge Analysis），是一款免费的，基于JAVA 环境下开源的机器学习（Machine Learning）以及数据挖掘（Data Minining）软件。Weka 是新西兰怀卡托大学（University of Waikato）开发的数据挖掘实验平台，目前仍然在项目主页进行维护与更新。Weka的主界面如图\ref{Weka}所示。
+ %\begin{figure}[tbh]
+ %\centering
+ %\includegraphics[width=0.7\textwidth]{Weka}
+ %\caption{Weka知识分析软件的主界面}
+ %\label{Weka}
+%\end{figure}
+
+\section{$BMVS^2$的测试}
+\subsection{测试环境}
+本系统的测试环境如表\ref{environment}所示。
+\begin{table}[tbh]
+\centering
+\caption{\label{environment} $BMVS^2$测试环境}
+
+\begin{tabular}{ll}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  硬件平台 \ \vline & Lenovo$^\circledR$ Y450 T6600 2.1GHz,2GB RAM \\
+  \hline
+  \hskip 51.2pt \vline & Microsoft$^\circledR$ Windows$^\circledR$ 7 SP1 32bit（English） \\
+  软件平台 \ \vline & Weka Machine Learning Software V3 \\
+  \hskip 51.2pt \vline& Matlab$^\circledR$ R2012a\\
+  \hline
+\end{tabular}
+\end{table}
 \subsection{任务概述}
 本实验对三种不同的资源权值分布特征进行分类，假设监控的数据分别是$R_i$=$\{r_{i1},r_{i2},\dots,r_{in}\}$，这三种权值\cite{dataclass}分别是：
 
@@ -42,7 +115,7 @@ Weka\cite{Weka}的全名是怀卡托知识分析环境（Waikato Environment for Knowledge Ana
  \label{cluster}
 \end{figure}
 \subsection{测试结果}
-通过Weka聚类分析，我们获得一个较理想的、符合实际意义的数据分布图，其任务需求曲线如图\ref{dataset2}所示，其中第4幅图的方框表示大部分的数据落入到此区域。通过对训练集的归类，本文给出三个类别标签，分别是A：代表CPU密集型任务；B：内存密集型任务；C：I/O密集型任务；D：普通类任务。
+通过Weka聚类分析，我们获得一个较理想的、符合实际意义的数据分布图，其任务需求曲线如图\ref{dataset2}所示，其中第4 幅图的方框表示大部分的数据落入到此区域。通过对训练集的归类，本文给出三个类别标签，分别是A：代表CPU密集型任务；B：内存密集型任务；C：I/O密集型任务；D：普通类任务。
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=1.0\textwidth]{dataset2}
@@ -104,21 +177,21 @@ T(i)=\left\{
 \right.
 \end{equation}
 
-则单一调度分配算法平台的收益和$MSPB^2C$收益的对比如图\ref{CMP}所示：
+则单一调度分配算法平台的收益和$BMVS^2$收益的对比如图\ref{CMP}所示：
 
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=0.85\textwidth]{CMP}
- \caption{单一调度分配算法和$MSPB^2C$的收益对比}
+ \caption{单一调度分配算法和$BMVS^2$的收益对比}
  \label{CMP}
 \end{figure}
 
-如图\ref{CMP}所示，$MSPB^2C$有着更高的收益，代表着有更高的系统平均利用率。A、B、C、D分别有着83.2、81、81.8、94 的收益，而本文提出的$MSPB^2C$有着96.4的收益，而且随着任务请求曲线（类高斯分布曲线）的逐渐平坦，$MSPB^2C$会获得更高的收益，如图\ref{CMP2}所示。
+如图\ref{CMP}所示，$BMVS^2$有着更高的收益，代表着有更高的系统平均利用率。A、B、C、D分别有着83.2、81、81.8、94 的收益，而本文提出的$BMVS^2$有着96.4的收益，而且随着任务请求曲线（类高斯分布曲线）的逐渐平坦，$BMVS^2$会获得更高的收益，如图\ref{CMP2}所示。
 
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=0.85\textwidth]{CMP2}
- \caption{单一调度分配算法和$MSPB^2C$的收益对比（随着资源分布的均衡）}
+ \caption{单一调度分配算法和$BMVS^2$的收益对比（随着资源分布的均衡）}
  \label{CMP2}
 \end{figure}
 \subsection{结论}

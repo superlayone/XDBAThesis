@@ -17,26 +17,25 @@
 \contentsline {subsection}{\numberline {2.3.1}资源监控}{12}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}资源调度策略}{13}{subsection.2.3.2}
 \contentsline {section}{\numberline {2.4}本章小结}{14}{section.2.4}
-\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}$MSPB^2C$的设计}{15}{chapter.3}
-\contentsline {section}{\numberline {3.1}系统设计}{15}{section.3.1}
+\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}基于贝叶斯分类的多算法混合虚拟资源调度系统}{15}{chapter.3}
+\contentsline {section}{\numberline {3.1}$BMVS^2$的设计}{15}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}系统结构设计}{15}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}系统的工作流程设计}{15}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}$MSPB^2C$的分析}{16}{section.3.2}
+\contentsline {section}{\numberline {3.2}$BMVS^2$的分析}{16}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}系统结构分析}{16}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}决策分类模块的理论分析}{19}{subsection.3.2.2}
 \contentsline {section}{\numberline {3.3}本章小结}{22}{section.3.3}
-\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}$MSPB^2C$的实现与评估}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}$MSPB^2C$实现平台}{23}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}硬件平台}{23}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}软件平台}{23}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}测试过程}{23}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}任务概述}{23}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}测试结果}{24}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}测试结果评估分析}{25}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}结论}{26}{subsection.4.2.4}
-\contentsline {section}{\numberline {4.3}本章小结}{26}{section.4.3}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结与展望}{29}{chapter.5}
-\contentsline {section}{\numberline {5.1}论文所完成的工作}{29}{section.5.1}
-\contentsline {section}{\numberline {5.2}前景与展望}{29}{section.5.2}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{31}{chapter*.4}
-\contentsline {chapter}{参考文献}{33}{chapter*.5}
+\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}$BMVS^2$的实现与测试}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}$BMVS^2$的实现}{23}{section.4.1}
+\contentsline {section}{\numberline {4.2}$BMVS^2$的测试}{25}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}测试环境}{25}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}任务概述}{25}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}测试结果}{26}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}测试结果评估分析}{27}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}结论}{28}{subsection.4.2.5}
+\contentsline {section}{\numberline {4.3}本章小结}{29}{section.4.3}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结与展望}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}论文所完成的工作}{31}{section.5.1}
+\contentsline {section}{\numberline {5.2}前景与展望}{31}{section.5.2}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{33}{chapter*.4}
+\contentsline {chapter}{参考文献}{35}{chapter*.5}

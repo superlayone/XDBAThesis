@@ -38,9 +38,24 @@
 %% set line spacing 1.5times,1.24*14.5=18pt
 \renewcommand{\baselinestretch}{1.24}
 
+%%-------------------------ADD LIST
+%% 代码
+\RequirePackage{listings}
+\lstset{language=C++}%这条命令可以让LaTeX排版时将C++键字突出显示
+\lstset{breaklines}%这条命令可以让LaTeX自动将长的代码行换行排版
+\lstset{extendedchars=false}%这一条命令可以解决代码跨页时，章节标题，页眉等汉字不显示的问题
+%%-------------------------END ADD LIST
+
+
+\usepackage{pifont}
+%%-------------------------ADD TIMES NEW ROMAN
+\usepackage{times}
 %%-------------------------ADD ITEM STYLE
-\renewcommand{\labelitemi}{$\bullet$}
-\renewcommand{\labelitemii}{$\bullet$}
+%%\ding{228}
+%%\ding{227}
+%%\ding{226}
+\renewcommand{\labelitemi}{\ding{228}}
+\renewcommand{\labelitemii}{\ding{226}}
 \renewcommand{\labelitemiii}{$\bullet$}
 %%-------------------------ADD PACKAGE
 \RequirePackage{algorithm}           
