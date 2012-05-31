@@ -2,35 +2,50 @@
 \chapter{$BMVS^2$µÄÊµÏÖÓë²âÊÔ}
 \label{chap:sim}
 \section{$BMVS^2$µÄÊµÏÖ}
-$BMVS^2$µÄµ÷¶ÈÊµÏÖÈç\ref{optflow}ËùÊ¾¡£
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=0.8\textwidth]{optflow}
  \caption{$BMVS^2$Ö´ĞĞ¹ı³Ì}
  \label{optflow}
 \end{figure}
-\\$\bullet$ \textbf{BMVS2\_FetchRequest()}º¯Êı
 
-Ê×ÏÈ£¬BMVS2\_FetchRequest()º¯Êı´Ó¼à¿ØÆ÷»ñµÃÈÎÎñÇëÇóÊı¾İ£¬È»ºó¾­¹ıÆ½ÒÆ¼«²î¹«Ê½£¨3-7£©½øĞĞ¹éÒ»»¯²Ù×÷£¬·µ»ØÒ»¸ö¾­¹ı¹éÒ»»¯µÄÇëÇóÊı¾İ¡£È»ºó£¬¹éÒ»»¯µÄÊı¾İ´«¸ø·ÖÀàÆ÷º¯Êı¡£
+$BMVS^2$µÄµ÷¶ÈÊµÏÖÈç\ref{optflow}ËùÊ¾¡£Ö´ĞĞÒ»´ÎÕâÑùµÄÁ÷³Ì¾ÍÏàÓ¦µÄÍê³ÉÁËÒ»´ÎÈÎÎñÇëÇóµÄ²¿Êğ²Ù×÷£¬ÈÎÎñÇëÇóµÄ½á¹¹ÌåÈçÏÂËùÊ¾£¬¼ÇÂ¼ÁËÈÎÎñµÄCPU¡¢ÄÚ´æºÍI/OÇëÇóÊı¾İ£¬BelongedClass³ÉÔ±´ú±íµÄÊÇ×îÖÕ»®·ÖµÄÀà±ğ¡£
+\begin{lstlisting}[frame=lines]
+struct Request
+{
+       double CPU;/*CPU request*/
+       double MEM;/*Memory request*/
+       double IO; /*IO request*/
+       int BelongedClass;
+       /*
+       remain area
+       */
+};
+\end{lstlisting}
+
+ÈçÁ÷³ÌÍ¼ËùÊ¾£¬¸ÃÁ÷³ÌÖĞµÄº¯Êı½âÊÍÈçÏÂ¡£
+\\$\bullet$ \textbf{Bmvs2FetchRequest()}º¯Êı
+
+Ê×ÏÈ£¬Bmvs2FetchRequest()º¯Êı´Ó¼à¿ØÆ÷»ñµÃÈÎÎñÇëÇóÊı¾İ£¬È»ºó¾­¹ıÆ½ÒÆ¼«²î¹«Ê½£¨3-7£©½øĞĞ¹éÒ»»¯²Ù×÷£¬·µ»ØÒ»¸ö¾­¹ı¹éÒ»»¯µÄÇëÇóÊı¾İ¡£È»ºó£¬¹éÒ»»¯µÄÊı¾İ´«¸ø·ÖÀàÆ÷º¯Êı¡£
 
 \begin{lstlisting}[frame=lines]
-void BMVS2_FetchRequest(int ReqNum,Request *Req,Request *FormattedReq)
+void Bmvs2FetchRequest(int ReqNum,Request *Req,Request *FormattedReq)
 {
      //¼ÆËãÆ½ÒÆ¼«²î
-     int _CPU=Max(Req)-Min(Req);
-     int _IO=Max(Req)-Min(Req);
-     int _MEM=Max(Req)-Min(Req);
+     int CPU=Max(Req)-Min(Req);
+     int IO=Max(Req)-Min(Req);
+     int MEM=Max(Req)-Min(Req);
      for(int i=0;i<ReqNum;i++)
      {
-             FormattedReq[i].CPU=(FormattedReq[i].CPU-min(Req.CPU))/_CPU;
+             FormattedReq[i].CPU=(FormattedReq[i].CPU-min(Req.CPU))/CPU;
              FormattedReq[i].IO=(FormattedReq[i].IO-min(Req.IO))/IO;
              FormattedReq[i].MEM=(FormattedReq[i].MEM-min(Req.MEM))/MEM;
      }
 }
 \end{lstlisting}
-$\bullet$ \textbf{BMVS2\_Classify()}º¯Êı
+$\bullet$ \textbf{Bmvs2Classify()}º¯Êı
 
-BMVS2\_Classify()»ñÈ¡ÒÑ¾­Ô¤´¦ÀíµÄÊı¾İ£¬È»ºó´ÓBMVS2\_FetchDatabase()º¯Êı»ñµÃ·ÖÀà±êÇ©£¬·ÖÀàµÄ½á¹ûÊÇ¸øÃ¿¸öÈËÎïÇëÇóµÄBelongedClass³ÉÔ±¸³Öµ¡£
+Bmvs2Classify()»ñÈ¡ÒÑ¾­Ô¤´¦ÀíµÄÊı¾İ£¬È»ºó´ÓBmvs2FetchDatabase()º¯Êı»ñµÃ·ÖÀà±êÇ©£¬·ÖÀàµÄ½á¹ûÊÇ¸øÃ¿¸öÈËÎïÇëÇóµÄBelongedClass³ÉÔ±¸³Öµ¡£
 
 \begin{lstlisting}[frame=lines]
      //·ÖÀà
@@ -39,7 +54,7 @@ BMVS2\_Classify()»ñÈ¡ÒÑ¾­Ô¤´¦ÀíµÄÊı¾İ£¬È»ºó´ÓBMVS2\_FetchDatabase()º¯Êı»ñµÃ·ÖÀà±
      cMat2 = confusionmat(Dlass,C2);
 \end{lstlisting}
 \begin{lstlisting}[frame=lines]
-void BMVS2_Classify(int ReqNum,Request *FormattedReq)
+void Bmvs2Classify(int ReqNum,Request *FormattedReq)
 {
      Classify(FormattedReq);
      for(int i=0;i<ReqNum;i++)
@@ -48,13 +63,12 @@ void BMVS2_Classify(int ReqNum,Request *FormattedReq)
      }
 }
 \end{lstlisting}
-$\bullet$ \textbf{BMVS2\_Sched()}º¯Êı
+$\bullet$ \textbf{Bmvs2Sched()}º¯Êı
 
 BMVS2\_Sched()»ñµÃ·ÖÀàµÄ½á¹û£¬¶ÔÓ¦¸÷¸ö·ÖÀàÔ¤ÏÈÉè¶¨µÄµ÷¶ÈËã·¨¡£
 \begin{lstlisting}[frame=lines]
-void BMVS2_Sched(int ReqNum,Request *FormattedReq)
+void Bmvs2Sched(int ReqNum,Request *FormattedReq)
 {
-     TaskList *A,*B,*C,*D;
      int CountA=0,CountB=0,CountC=0,CountD=0;
      for(int i=0;i<ReqNum;i++)
      {
@@ -68,6 +82,52 @@ void BMVS2_Sched(int ReqNum,Request *FormattedReq)
      }
 }
 \end{lstlisting}
+$\bullet$ \textbf{Bmvs2OptSched()}º¯Êı
+
+Bmvs2OptSched()¶ÔÒÑ¾­·ÖÀàºÃµÄÈÎÎñÁĞ±íµ÷ÓÃÏàÓ¦µÄµ÷¶ÈËã·¨¡£ÓÉÓÚÈÎÎñ±àºÅÒÑ¾­ÔÚBmvs2Sched()º¯ÊıÖĞÍê³É·ÖÀà¼ÇÂ¼£¬ËùÒÔBmvs2OptSched()º¯ÊıÖ±½Óµ÷ÓÃÕâĞ©Ëã·¨¿âÖĞ¶ÔÓ¦µÄº¯ÊıÊµÊ©ÈÎÎñµÄ²¿Êğ£¬ÆäÖĞÕë¶Ô4ÀàÈÎÎñËùÊ¹ÓÃµÄµ÷¶ÈËã·¨ÊÇÒÑÖªµÄÓÅĞãËã·¨£¬·Ö±ğÎªCpuIncentive()¡¢MemIncentive()¡¢IoIncentive()ºÍShareIncentive()µ÷¶Èº¯Êı£¬·Ö±ğ´ú±íÕë¶ÔCPUÃÜ¼¯¡¢ÄÚ´æÃÜ¼¯¡¢I/OÃÜ¼¯ºÍÆÕÍ¨ÀàÈÎÎñ£¬¹ı³ÌÈçÏÂËùÊ¾¡£
+\begin{lstlisting}[frame=lines]
+void Bmvs2OptSched()
+{
+     /*Task A,B,C,D already exist*/
+     CpuIncentive();   /*Deploy A Type Task*/
+     MemIncentive();   /*Deploy B Type Task*/
+     IoIncentive();    /*Deploy C Type Task*/
+     ShareIncentive(); /*Deploy D Type Task*/
+}
+\end{lstlisting}
+$\bullet$ \textbf{Bmvs2ComputeP()}º¯Êı
+
+¸ù¾İ¹«Ê½£¨3-5£©£¬Bmvs2ComputeP()Ôò¼ÆËã³ö²¿ÊğÈÎÎñºóµÄ´ú¼ÛP£¬¼´ÕıÈ··ÖÀàµ½Ô¤¹ÀµÄÀà±ğÖĞµÄ±ÈÀı£¬Æä´úÂëÈçÏÂËùÊ¾¡£
+\begin{lstlisting}[frame=lines]
+void Bmvs2ComputeP(int ClassNum,int TaskNum)
+{
+	 for(int i=0;i<ClassNum;i++)
+	 {
+		 for(int j=0;j<TaskNum;j++)
+		 {
+			 Profit+=T(i,j);  /*¹«Ê½3-6*/
+		 }
+	 }
+	 Profit=Profit/TaskNum;
+}
+\end{lstlisting}
+$\bullet$ \textbf{Bmvs2FetchP()}ºÍ\textbf{Bmvs2CMPP()}º¯Êı
+
+¸Ãº¯ÊıÓÃÓÚ´ÓÊı¾İ¿âÖĞ»ñÈ¡ÀúÊ·´ú¼ÛĞÅÏ¢£¬¹©Bmvs2CMPP()º¯Êı±È½Ï£¬Èç¹ûĞÂµÄ´ú¼Û±ÈÀúÊ·µÄ¸ß£¬Ôòµ÷ÓÃBmvs2ExchangeData() º¯ÊıÊµÊ©´æ´¢½»»»²Ù×÷¡£
+\begin{lstlisting}[frame=lines]
+void Bmvs2CMPP(double Profit)
+{
+	/*Fetch Profit from database*/
+        int p=Bmvs2FetchP();
+        /*Compare profit*/
+	if(Profit>p)
+	{
+	   /*bigger than,do exchange now*/
+            Bmvs2ExchangeData();
+	}
+        /*else return*/
+}
+\end{lstlisting}
 %Weka\cite{Weka}µÄÈ«ÃûÊÇ»³¿¨ÍĞÖªÊ¶·ÖÎö»·¾³£¨Waikato Environment for Knowledge Analysis£©£¬ÊÇÒ»¿îÃâ·ÑµÄ£¬»ùÓÚJAVA »·¾³ÏÂ¿ªÔ´µÄ»úÆ÷Ñ§Ï°£¨Machine Learning£©ÒÔ¼°Êı¾İÍÚ¾ò£¨Data Minining£©Èí¼ş¡£Weka ÊÇĞÂÎ÷À¼»³¿¨ÍĞ´óÑ§£¨University of Waikato£©¿ª·¢µÄÊı¾İÍÚ¾òÊµÑéÆ½Ì¨£¬Ä¿Ç°ÈÔÈ»ÔÚÏîÄ¿Ö÷Ò³½øĞĞÎ¬»¤Óë¸üĞÂ¡£WekaµÄÖ÷½çÃæÈçÍ¼\ref{Weka}ËùÊ¾¡£
  %\begin{figure}[tbh]
  %\centering
@@ -78,20 +138,23 @@ void BMVS2_Sched(int ReqNum,Request *FormattedReq)
 
 \section{$BMVS^2$µÄ²âÊÔ}
 \subsection{²âÊÔ»·¾³}
-±¾ÏµÍ³µÄ²âÊÔ»·¾³Èç±í\ref{environment}ËùÊ¾¡£
+±¾ÏµÍ³µÄ²âÊÔ»·¾³Èç±í\ref{environment}ËùÊ¾¡£ÆäÖĞWeka\cite{Weka}µÄÈ«ÃûÊÇ»³¿¨ÍĞÖªÊ¶·ÖÎö»·¾³£¨Waikato Environment for Knowledge Analysis£©£¬ÊÇÒ»¿îÃâ·ÑµÄ£¬»ùÓÚJAVA »·¾³ÏÂ¿ªÔ´µÄ»úÆ÷Ñ§Ï°£¨Machine Learning£©ÒÔ¼°Êı¾İÍÚ¾ò£¨Data Minining£©Èí¼ş¡£Weka ÊÇĞÂÎ÷À¼»³¿¨ÍĞ´óÑ§£¨University of Waikato£©¿ª·¢µÄÊı¾İÍÚ¾òÊµÑéÆ½Ì¨£¬Ä¿Ç°ÈÔÈ»ÔÚÏîÄ¿Ö÷Ò³½øĞĞÎ¬»¤Óë¸üĞÂ¡£
 \begin{table}[tbh]
 \centering
 \caption{\label{environment} $BMVS^2$²âÊÔ»·¾³}
 
-\begin{tabular}{ll}
+\begin{tabular}{l|l}
   \hline
   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-  Ó²¼şÆ½Ì¨ \ \vline & Lenovo$^\circledR$ Y450 T6600 2.1GHz,2GB RAM \\
+  Ó²¼şÆ½Ì¨& \ \ Lenovo$^\circledR$ Y450 T6600 2.1GHz,2GB RAM \\
   \hline
-  \hskip 51.2pt \vline & Microsoft$^\circledR$ Windows$^\circledR$ 7 SP1 32bit£¨English£© \\
-  Èí¼şÆ½Ì¨ \ \vline & Weka Machine Learning Software V3 \\
-  \hskip 51.2pt \vline& Matlab$^\circledR$ R2012a\\
-  \hline
+  Èí¼şÆ½Ì¨ & \begin{tabular}{l}
+              Microsoft$^\circledR$ Windows$^\circledR$ 7 SP1 32bit£¨English£© \\
+              Weka Machine Learning Software V3 \\
+              Microsoft$^\circledR$ Visual Studio$^\circledR$ 2010 Ultimate \\
+              Matlab$^\circledR$ R2012a\\
+             \end{tabular}
+  \\ \hline
 \end{tabular}
 \end{table}
 \subsection{ÈÎÎñ¸ÅÊö}
@@ -115,7 +178,7 @@ void BMVS2_Sched(int ReqNum,Request *FormattedReq)
  \label{cluster}
 \end{figure}
 \subsection{²âÊÔ½á¹û}
-Í¨¹ıWeka¾ÛÀà·ÖÎö£¬ÎÒÃÇ»ñµÃÒ»¸ö½ÏÀíÏëµÄ¡¢·ûºÏÊµ¼ÊÒâÒåµÄÊı¾İ·Ö²¼Í¼£¬ÆäÈÎÎñĞèÇóÇúÏßÈçÍ¼\ref{dataset2}ËùÊ¾£¬ÆäÖĞµÚ4 ·ùÍ¼µÄ·½¿ò±íÊ¾´ó²¿·ÖµÄÊı¾İÂäÈëµ½´ËÇøÓò¡£Í¨¹ı¶ÔÑµÁ·¼¯µÄ¹éÀà£¬±¾ÎÄ¸ø³öÈı¸öÀà±ğ±êÇ©£¬·Ö±ğÊÇA£º´ú±íCPUÃÜ¼¯ĞÍÈÎÎñ£»B£ºÄÚ´æÃÜ¼¯ĞÍÈÎÎñ£»C£ºI/OÃÜ¼¯ĞÍÈÎÎñ£»D£ºÆÕÍ¨ÀàÈÎÎñ¡£
+Í¨¹ıWeka¾ÛÀà·ÖÎö£¬ÎÒÃÇ»ñµÃÒ»¸ö½ÏÀíÏëµÄ¡¢·ûºÏÊµ¼ÊÒâÒåµÄÊı¾İ·Ö²¼Í¼£¬ÆäÈÎÎñĞèÇóÇúÏßÈçÍ¼\ref{dataset2}ËùÊ¾£¬ÆäÖĞÍ¼£¨a£©±íÊ¾µÄÊÇCPUĞèÇóÇúÏß£¬¿ÉÒÔ¿´³ö£¬CPUĞèÇó´ó²¿·Ö³öÈ¥ÖĞ¼ä¶Î£¬¼«¶ËÇé¿öÖ»ÓĞÉÙÁ¿µÄ·Ö²¼£»Í¼£¨b£©´ú±íÄÚ´æ·Ö²¼£¬Ïà±ÈCPU·Ö²¼£¬ÄÚ´æ´¦ÓÚÖĞ¼ä²¿·ÖµÄÑù±¾¸ü¶à£»I/O·Ö²¼³ÊÏÖ³öÁË½ÏËæ»úµÄ·Ö²¼£¬µ«ÊÇ¼«¶ËÇé¿öÒ²ºÜÉÙ·¢Éú£¬ÕâÓë\cite{intro_DRF} ÖĞFacebookÊµ¼Ê²âÊÔ·Ö²¼Í¼µÄÇé¿ö´óÖÂÏàÍ¬£¬ËµÃ÷¸ÃÍ¼ÊÇ·ûºÏÊµ¼ÊÇé¿öµÄ£»Í¼£¨d£©ÓÃºĞÍ¼±íÊ¾ÁËCPU¡¢ÄÚ´æºÍI/OÇëÇóµÄ´ó²¿·ÖÊı¾İµÄ·Ö²¼Çé¿ö¡£
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=1.0\textwidth]{dataset2}
@@ -129,7 +192,7 @@ void BMVS2_Sched(int ReqNum,Request *FormattedReq)
 P(c)=\frac{NumOf(c)}{Total};c \in\{A,B,C\}
 \end{equation}
 
-Òò´Ë£¬P£¨A£©=0.16£¬P£¨B£©=0.05£¬P£¨C£©=0.09£¬P£¨D£©=0.70¡£·ÂÕæÖĞ·Ö±ğÒÔ1¡¢2¡¢3¡¢4´ú±íA¡¢B¡¢C¡¢DÀà±ğ£¬ÈçÍ¼\ref{bayes1} ËùÊ¾µÄÊÇÓÉ100 ×éÊı¾İÑµÁ·µÄ½á¹û¡£
+Òò´Ë£¬P£¨A£©=0.16£¬P£¨B£©=0.05£¬P£¨C£©=0.09£¬P£¨D£©=0.70¡£²âÊÔÖĞ·Ö±ğÒÔ1¡¢2¡¢3¡¢4´ú±íA¡¢B¡¢C¡¢DÀà±ğ£¬ÈçÍ¼\ref{bayes1} ËùÊ¾µÄÊÇÓÉ100 ×éÊı¾İÑµÁ·µÄ½á¹û¡£ÆäÖĞÖù×´Í¼ÖĞµÄ¾ØÕó´ú±íµÄÊÇ·ÖÀàºóµÄ»ìÏı¾ØÕó£¬ÆäÖĞ±íÊ¾ÁËÕıÈ··ÖÀàÓë·ñµÄÈÎÎñ¸öÊı£»ÒÔµÚ4 ÀàÎªÀı£¬´Ó×óÏòÓÒÒÀ´ÎÎªÕıÈ··ÖÀàµ½µÚ4ÀàµÄ66¸öÑù±¾£¬´íÎóµÄ·Ö¸øµÚ1ÀàµÄ1¸ö¡¢µÚ2Àà2¸ö¡¢µÚ3Àà1¸ö£»ÓÒÍ¼Ö±¹ÛÉÏ¸ø³öÁËÈÎÎñÔÚ¿Õ¼äÉÏµÄ·Ö²¼Çé¿ö¡£
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=1.0\textwidth]{bayes1}
@@ -137,7 +200,7 @@ P(c)=\frac{NumOf(c)}{Total};c \in\{A,B,C\}
  \label{bayes1}
 \end{figure}
 
-ÈçÍ¼\ref{bayes2}ËùÊ¾£¬²âÊÔ100×éÈÎÎñÇëÇóÊı¾İ¶øµÃµ½µÄÊı¾İ¡£
+ÈçÍ¼\ref{bayes2}ËùÊ¾£¬²âÊÔ100×éÈÎÎñÇëÇóÊı¾İ¶øµÃµ½µÄÊı¾İ¡£Í¬\ref{bayes1}£¬¸ÃÍ¼Ò²Ê¹ÓÃÁË¾ØÕóºÍÁ¢ÌåÍ¼¸ø³öÏêÏ¸µÄÈÎÎñ·Ö²¼¡£
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=1.0\textwidth]{bayes2}
@@ -145,7 +208,7 @@ P(c)=\frac{NumOf(c)}{Total};c \in\{A,B,C\}
  \label{bayes2}
 \end{figure}
 
-´ÓÍ¼ÖĞ¿ÉÒÔ¿´³ö£¬ÈÎÎñ·Ö²¼Ò²×ñ´ÓÀàËÆ¸ßË¹·Ö²¼µÄÌØÕ÷£¬¶Ô×ÊÔ´ĞèÇóÃÜ¼¯µÄÈÎÎñÊôÓÚÉÙÊı£¬´ó¶àÊıÈÎÎñÊôÓÚÆÕÍ¨Àà¡£Öù×´Í¼µÄ¾ØÕó´ú±íÕıÈ··ÖÀàÓë·ñµÄ¸öÊı£¬ÀûÓÃ¹«Ê½£¨3-5£©¿ÉÒÔÇóµÃÕıÈ··ÖÀàµÄ°Ù·Ö±È¡£Í¬Ê±£¬¸Ã¾ØÕó»¹ÓÃÀ´ÇóµÃÏÂÒ»½Ú¶¨ÒåµÄÊÕÒæº¯Êı¡£
+´ÓÍ¼ÖĞ¿ÉÒÔ¿´³ö£¬ÈÎÎñ·Ö²¼Ò²×ñ´ÓÀàËÆ¸ßË¹·Ö²¼µÄÌØÕ÷£¬¶Ô×ÊÔ´ĞèÇóÃÜ¼¯µÄÈÎÎñÊôÓÚÉÙÊı£¬´ó¶àÊıÈÎÎñÊôÓÚÆÕÍ¨Àà¡£ÀûÓÃ¹«Ê½£¨3-5£©¿ÉÒÔÇóµÃÕıÈ··ÖÀàµÄ°Ù·Ö±È¡£Í¬Ê±£¬¸Ã¾ØÕó»¹ÓÃÀ´ÇóµÃÏÂÒ»½Ú¶¨ÒåµÄÊÕÒæº¯Êı¡£
 \subsection{²âÊÔ½á¹ûÆÀ¹À·ÖÎö}
 ·ÖÀàºóµÄÈÎÎñÇëÇó£¬¾­¹ıÒ»¸öÖØĞÂ×éºÏµÄ¹ı³Ì£¬¿ÉÒÔĞÎ³ÉÒ»¸ö¸üÓÅµÄ×éÌ¬¡£È»ºóÔÚ´Ë»ù´¡ÉÏÖØĞÂ·ÖÅäÈÎÎñÇëÇóµÄÈ¥Ïò£¬ÈçÍ¼\ref{recombin}ËùÊ¾¡£
  \begin{figure}[tbh]

@@ -27,15 +27,15 @@
 \contentsline {section}{\numberline {3.3}本章小结}{22}{section.3.3}
 \contentsline {chapter}{\numberline {第四章\hspace {0.3em}}$BMVS^2$的实现与测试}{23}{chapter.4}
 \contentsline {section}{\numberline {4.1}$BMVS^2$的实现}{23}{section.4.1}
-\contentsline {section}{\numberline {4.2}$BMVS^2$的测试}{25}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}测试环境}{25}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}任务概述}{25}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}测试结果}{26}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}测试结果评估分析}{27}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}结论}{28}{subsection.4.2.5}
-\contentsline {section}{\numberline {4.3}本章小结}{29}{section.4.3}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结与展望}{31}{chapter.5}
-\contentsline {section}{\numberline {5.1}论文所完成的工作}{31}{section.5.1}
-\contentsline {section}{\numberline {5.2}前景与展望}{31}{section.5.2}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{33}{chapter*.4}
-\contentsline {chapter}{参考文献}{35}{chapter*.5}
+\contentsline {section}{\numberline {4.2}$BMVS^2$的测试}{26}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}测试环境}{26}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}任务概述}{27}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}测试结果}{27}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}测试结果评估分析}{28}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}结论}{30}{subsection.4.2.5}
+\contentsline {section}{\numberline {4.3}本章小结}{31}{section.4.3}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结与展望}{33}{chapter.5}
+\contentsline {section}{\numberline {5.1}论文所完成的工作}{33}{section.5.1}
+\contentsline {section}{\numberline {5.2}前景与展望}{33}{section.5.2}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{35}{chapter*.4}
+\contentsline {chapter}{参考文献}{37}{chapter*.5}

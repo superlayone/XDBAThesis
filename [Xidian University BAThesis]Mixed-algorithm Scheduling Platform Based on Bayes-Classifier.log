@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2012.5.8)  29 MAY 2012 20:20
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2012.5.8)  31 MAY 2012 09:48
 entering extended mode
 **[Xidian*University*BAThesis]Mixed-algorithm*Scheduling*Platform*Based*on*Baye
 s-Classifier.tex
@@ -925,13 +925,7 @@ Package Fancyhdr Warning: \headheight is too small (11.0pt):
 
 
 
-]
-Overfull \hbox (9.32947pt too wide) in paragraph at lines 13--14
-[][]\OT1/ptm/m/n/12.05 A nov-el pro-to-type of sys-tem architecture-Mixed-algor
-ithm Schedul-ing Plat-for-m Based
- []
-
-) [2
+]) [2
 
 ]
 ("D:\File\XDBAthesis\[Xidian University BAThesis]Mixed-algorithm Scheduling Pla
@@ -1040,45 +1034,61 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 4.
 
 File: figures/optflow.eps Graphic file (type eps)
-<figures/optflow.eps> [23
+<figures/optflow.eps>
+LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <12.05> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 16.
+ [23
 
 
 
 ]
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 23.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 38.
  (D:\MSI\CTex\MiKTeX\tex\latex\psnfss\omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <12.05> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 23.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 38.
 
 [24]
+Overfull \hbox (4.3797pt too wide) in paragraph at lines 87--88
+\OT1/ptm/m/n/12.05 IoIncentive()\C19/rm/m/n/12.05/43 Ú\OT1/ptm/m/n/12.05 ShareI
+ncentive()\C19/zhsong/bx/n/12.05/40 N Ý \C19/rm/m/n/12.05/43 ¼ \C19/zhsong/bx/n
+/12.05/55 ê|\C19/rm/m/n/12.05/26 §| \C19/zhsong/bx/n/12.05/41 © \C19/zhsong/bx/
+n/12.05/37 O \C19/rm/m/n/12.05/39 “ \C19/zhsong/bx/n/12.05/37 L \C19/zhsong/bx/
+n/12.05/64  \C19/zhsong/bx/n/12.05/40 é\OT1/ptm/m/n/12.05 CPU\C19/rm/m/n/12.05
+/50 — \C19/rm/m/n/12.05/45 8|\C19/rm/m/n/12.05/25 !| \C19/zhsong/bx/n/12.05/51 
+S \C19/rm/m/n/12.05/39  \C19/rm/m/n/12.05/50 — \C19/rm/m/n/12.05/45 8|\C19/rm/
+m/n/12.05/25 !| \OT1/ptm/m/n/12.05 I/O\C19/rm/m/n/12.05/50 —
+ []
+
+[25]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 79.
+(hyperref)                removing `math shift' on input line 139.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `superscript' on input line 79.
+(hyperref)                removing `superscript' on input line 139.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 79.
+(hyperref)                removing `math shift' on input line 139.
 
+[26]
 File: figures/cluster.eps Graphic file (type eps)
-<figures/cluster.eps>
+ <figures/cluster.eps>
 File: figures/dataset2.eps Graphic file (type eps)
- <figures/dataset2.eps> [25]
+ <figures/dataset2.eps> [27]
 File: figures/bayes1.eps Graphic file (type eps)
- <figures/bayes1.eps> [26]
+ <figures/bayes1.eps>
 File: figures/bayes2.eps Graphic file (type eps)
 
 <figures/bayes2.eps>
 File: figures/recombin.eps Graphic file (type eps)
- <figures/recombin.eps> [27]
+ <figures/recombin.eps> [28] [29]
 File: figures/CMP.eps Graphic file (type eps)
  <figures/CMP.eps>
-Overfull \hbox (7.4797pt too wide) in paragraph at lines 189--190
+Overfull \hbox (7.4797pt too wide) in paragraph at lines 252--253
 \C19/zhsong/bx/n/12.05/65 X\OT1/ptm/m/n/12.05 96.4\C19/zhsong/bx/n/12.05/40  \
 C19/zhsong/bx/n/12.05/55 Â \C19/zhsong/bx/n/12.05/61 Ã|\C19/rm/m/n/12.05/26 §| 
 \C19/zhsong/bx/n/12.05/41  \C19/rm/m/n/12.05/53 … \C19/zhsong/bx/n/12.05/56 ‘ 
@@ -1093,13 +1103,13 @@ C19/zhsong/bx/n/12.05/55 Â \C19/zhsong/bx/n/12.05/61 Ã|\C19/rm/m/n/12.05/26 §|
  []
 
 File: figures/CMP2.eps Graphic file (type eps)
-<figures/CMP2.eps>) [28] [29] (D:\File\XDBAthesis\chapter/chap-faq.tex [30
+<figures/CMP2.eps> [30]) [31] (D:\File\XDBAthesis\chapter/chap-faq.tex [32
 
 
 
 ]
 µÚÎåÕÂ
-[31]) [32] (D:\File\XDBAthesis\chapter/thanks.tex
+[33]) [34] (D:\File\XDBAthesis\chapter/thanks.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \hskip 12.05pt
@@ -1110,12 +1120,12 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \hskip 12.05pt
 (hyperref)                replaced by space on input line 2.
 
-) [33
+) [35
 
 
 
 
-] (D:\File\XDBAthesis\chapter/bib.tex [34
+] (D:\File\XDBAthesis\chapter/bib.tex [36
 
 
 
@@ -1135,7 +1145,7 @@ Underfull \hbox (badness 4120) in paragraph at lines 93--96
 ic-s and Au-toma-tion,San
  []
 
-[35]) [36]
+[37]) [38]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 58.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 58.
 
@@ -1154,13 +1164,13 @@ Scheduling*Platform*Based*on*Bayes-Classifier.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 18409 strings out of 495355
- 293550 string characters out of 3183659
- 407038 words of memory out of 3000000
- 21075 multiletter control sequences out of 15000+200000
+ 18438 strings out of 495355
+ 294079 string characters out of 3183659
+ 398038 words of memory out of 3000000
+ 21104 multiletter control sequences out of 15000+200000
  103103 words of font info for 347 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 47i,16n,60p,4188b,1777s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 47i,22n,60p,4188b,1799s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on "[Xidian University BAThesis]Mixed-algorithm Scheduling Platf
-orm Based on Bayes-Classifier.dvi" (42 pages, 270788 bytes).
+orm Based on Bayes-Classifier.dvi" (44 pages, 286260 bytes).
