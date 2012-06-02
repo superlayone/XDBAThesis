@@ -30,9 +30,9 @@
 \contentsline {section}{\numberline {4.2}$BMVS^2$的测试}{26}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}测试环境}{26}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}任务概述}{27}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}测试结果}{27}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}测试结果评估分析}{28}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}结论}{30}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.3}测试结果}{28}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}测试结果评估分析}{29}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}结论}{31}{subsection.4.2.5}
 \contentsline {section}{\numberline {4.3}本章小结}{31}{section.4.3}
 \contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结与展望}{33}{chapter.5}
 \contentsline {section}{\numberline {5.1}论文所完成的工作}{33}{section.5.1}

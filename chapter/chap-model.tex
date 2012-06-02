@@ -163,7 +163,7 @@ Algorithm\ref{alg:Bayes}和\ref{alg:Prob}是分类决策的伪代码：
 \label{alg:Bayes}                       %给算法一个标签，这样方便在文中对算法的引用
 \begin{algorithmic}[1]                  %不知[1]是干嘛的？
 \REQUIRE ~~\\                           %算法的输入参数：Initialization
-    $X=\{x_1,x_2,\dots,x_n\}$   \hskip 30pt $\rhd$ 待分类项\\
+    $X=\{x_1,x_2,\dots,x_n\}$   \hskip 36pt $\rhd$ 待分类项\\
     $C=\{C_1,C_2,\dots,C_m\}$   \hskip 30pt $\rhd$ 已有类别
 \ENSURE ~~\\                           %算法的迭代：Iteration
     %Ensemble of classifiers on the current batch,  $E_n$;
@@ -221,9 +221,9 @@ P值越高代表着决策的正确率越高，如果分类的P值比若干次的值都高，则进行存储交换，用
 
 由于监控器监控的数据有多种，比如CPU使用率、内存使用量、I/O带宽、网络带宽、请求向量等等，所以为了使不同的量纲能够进行比较，就要做出适当的变换，将不同的数据映射到[0,1]区间内。本文采用平移极差变换，假设n个虚拟机，$R_i$表示第i 个虚拟机的资源向量，$R_i$=$\{r_{i1},r_{i2},\dots,r_{in}\}$，变换方法如下：
 \begin{equation}
-x_{ik}^\prime=\frac{x_{ik}-\min\limits_{1\leq i \leq n}\{x_{ik}\}}{\max\limits_{1\leq i \leq n}\{x_{ik}\}-\min\limits_{1\leq i \leq n}\{x_{ik}\}}
+r_{ik}^\prime=\frac{r_{ik}-\min\limits_{1\leq i \leq n}\{r_{ik}\}}{\max\limits_{1\leq i \leq n}\{r_{ik}\}-\min\limits_{1\leq i \leq n}\{r_{ik}\}}
 \end{equation}
 
 同理，任务请求的向量也使用平移极差变化得到归一化的值进行计算。
 \section{本章小结}
-本章分别从原型设计和原型分析两方面阐释了$BMVS^2$的具体细节。第一部分首先从架构图介绍了本系统，并详细介绍了系统的工作流程，继而引出第二节对系统从理论上进行分析。第二节着重从数学方面对分类器和预测器进行了精确的分析，并给出了其工作的伪代码，深入阐述了其实现环节，最后给出了评价准则。
+本章分别从系统设计和系统分析两方面阐释了$BMVS^2$的具体细节。第一部分首先从架构图介绍了本系统，并详细介绍了系统的工作流程，继而引出第二节对系统从理论上进行分析。第二节着重从数学方面对分类器和预测器进行了精确的分析，并给出了其工作的伪代码，深入阐述了其实现环节，最后给出了评价准则。

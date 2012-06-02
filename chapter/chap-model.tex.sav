@@ -1,7 +1,7 @@
 
-\chapter{$MSPB^2C$的设计}
+\chapter{基于贝叶斯分类的多算法混合虚拟资源调度系统}
 \label{chap:model}
-\section{系统设计}
+\section{$BMVS^2$的设计}
 \subsection{系统结构设计}
 在科学技术的发展史上，系统工程与其他技术科学一样，它的产生和发展主要由需求所驱动。一个系统都有着它特定的架构，在该架构下，根据预定义的规则执行着任务流。
 
@@ -17,11 +17,11 @@
   \item 传统的决策支持是在一个特定算法下，处理的能力有限，它不能感知，也丢弃了一些有用的历史信息，放弃了对这些信息进行融合、分析和推理，也就没有自我适应、自学习和自组织的能力。
 \end{enumerate}
 
-基于此，本文提出了一种新的虚拟计算平台资源调度系统的架构-基于贝叶斯分类的多算法混合调度平台（Mixed-algorithm Scheduling Platform Based on Bayes-Classifier，简称$MSPB^2C$），它的架构如图\ref{sys}所示：
+基于此，本文提出了一种基于贝叶斯分类的多算法混合虚拟资源调度系统（Bayes-classifier based Mixed-algorithm Virtual-resources Scheduling System ，简称$BMVS^2$），它的架构如图\ref{sys}所示：
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=0.8\textwidth]{sys}
- \caption{$MSPB^2C$的架构}
+ \caption{$BMVS^2$的架构}
  \label{sys}
 \end{figure}
 \subsection{系统的工作流程设计}
@@ -40,18 +40,18 @@
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=0.8\textwidth]{modelflow}
- \caption{$MSPB^2C$的工作流程}
+ \caption{$BMVS^2$的工作流程}
  \label{modelflow}
 \end{figure}
  \begin{figure}[tbh]
  \centering
  \includegraphics[width=0.8\textwidth]{request}
- \caption{$MSPB^2C$的任务请求重组机制}
+ \caption{$BMVS^2$的任务请求重组机制}
  \label{request}
 \end{figure}
-\section{$MSPB^2C$的分析}
+\section{$BMVS^2$的分析}
 \subsection{系统结构分析}
-结合$MSPB^2C$的架构图，该结构的各个部分的分析如下：
+结合$BMVS^2$的架构图，该系统的各个部分的分析如下：
 
 \begin{enumerate}
   \item 硬件层
@@ -62,35 +62,40 @@
   该层的作用是提供对硬件进行虚拟化，包括CPU、内存、I/O、块设备等等，同时，监控器也处于该层，监控位于该层上的VM 运行使用情况、任务请求情况，以及硬件的资源情况。
   \item 知识发现
 
-  虚拟化系统发展至今，已经出现了众多的调度算法，不乏优秀的资源调度策略，但是基本上是基于受限的数学模型抽象，拘泥于确定的模型。而随着智能系统的发展，虚拟资源调度系统下一步也会朝着更加智能的方向发展，而作为具有学习能力的系统，预测感知和分类决策模块是必不可少的。它们能够结合历史信息对当前环境状态做出一个最佳的估计。
+  虚拟化系统发展至今，已经出现了众多的调度算法，不乏优秀的资源调度策略，但是基本上是基于受限的数学模型抽象，拘泥于确定的模型。而随着智能系统的发展，虚拟资源调度系统下一步也会朝着更加智能的方向发展，而作为具有学习能力的系统，预测感知、分类决策、数据库模块是必不可少的。它们能够结合历史信息对当前环境状态做出一个最佳的估计。
 
   \item 算法模块
 
   本系统挂载多个算法模块，由于目前已有的算法都有着特定的应用背景，比如针对CPU密集、I/O密集、计算公平、存储优先等等，而我们可以根据预测分类机制对任务请求实施组态的分类，每个组实施不同的分配策略，以达到当前的最佳期望。
+  \item Scheduler
+
+  调度器是建立在分类基础之上的一个模块，在分类完成后，调度器完成对任务的划分，部署到不同的VM上，而具体到每个VM上的调度则由VM上的调度算法完成。
+  \item 反馈
+
+  输出的决策产生的影响直接或间接的反馈到决策输入端，这样便形成了一个闭环控制系统。为了实现闭环反馈控制，必须对决策产生的影响进行评价，由评价因子决定影响的优劣。
 \end{enumerate}
 
-$MSPB^2C$有着很明确的模块化思想，将所需的要素组合在一起，在特定的层上构成了一个具有特定功能的子系统，子系统作为通用性的模块与其它模块要素进行组合。模块化设计是绿色设计方法之一，具有高内聚、低耦合的特点，它已经从理念转变为较成熟的设计方法。将绿色设计思想与模块化设计方法结合起来，可以同时满足产品的功能属性和环境属性，同时满足后续的更改、添加、删除等等。
+$BMVS^2$有着很明确的模块化思想，将所需的要素组合在一起，在特定的层上构成了一个具有特定功能的子系统，子系统作为通用性的模块与其它模块要素进行组合。模块化设计是绿色设计方法之一，具有高内聚、低耦合的特点，它已经从理念转变为较成熟的设计方法。将绿色设计思想与模块化设计方法结合起来，可以同时满足产品的功能属性和环境属性，同时满足后续的更改、添加、删除等等。
 
-$MSPB^2C$核心模块是预测分类模块，数据挖掘的任务就是从其目标上进行分类，为此，有如下定义：
+$BMVS^2$核心模块是预测分类模块，数据挖掘的任务就是从其目标上进行分类，为此，有如下定义：
 
 \begin{defn}
 数据挖掘就是对观测到的数据集（一般来讲是很庞大的）进行分析，目的是发现未知的关系和以数据拥有者可以理解并对其有价值的新颖方式来总结数据。
 \end{defn}
-
 带有知识发现的数据挖掘就是从目标上进行分类\cite{data}，分类是数据挖掘中非常重要的一种技术。不同的方法构造的分类器也不同，主要有决策树、贝叶斯、K-临近等等。其中贝叶斯分类器就是使用概率理论，以贝叶斯定理为基础，建立分类模型的一种学习方式。此外，分类器不会独立存在，大多会伴随\textbf{知识发现}（Knowledge Discovery，简称KD）而存在。
 
 分类和预测是两个概念，两种方法都是数据挖掘中对数据分析的方法，但分类不等同于预测。所以在提出架构的时候将两者分离。
 
 在具有模式的完整统计知识条件下，贝叶斯分类器是按照贝叶斯决策理论进行设计的一种最优分类器。分类器是对每一个输入模式赋予一个类别名称的模块，而贝叶斯分类器是各种分类器中分类错误概率最小或者在预先给定代价的情况下平均风险最小的分类器\cite{MinErrBayes}。它的设计方法是一种最基本的统计分类方法。
 
-从控制论角度来分析，本系统符合控制论系统的特征：
+%从控制论角度来分析，本系统符合控制论系统的特征：
 
-\begin{enumerate}
-  \item 有一个预定的稳定状态或平衡状态。例如本系统中一次决策后，系统按产生的算法进入运行态。
-  \item 从外部环境到内部有一种信息的传递。例如本系统中，外界提交请求，监控器获取数据，决策支持模块给出策略。
-  \item 这种系统具有一种专门设计用来校正行为的装置。例如本系统的反馈、知识发现、存储交换机制。
-  \item 这种系统为了在不断变化的环境中维持自身的稳定，内部具有自动调节的机制，换言之，控制系统都是一种动态系统。本系统是一种动态的带有知识学习能力的动态系统。
-\end{enumerate}
+%\begin{enumerate}
+%  \item 有一个预定的稳定状态或平衡状态。例如本系统中一次决策后，系统按产生的算法进入运行态。
+%  \item 从外部环境到内部有一种信息的传递。例如本系统中，外界提交请求，监控器获取数据，决策支持模块给出策略。
+%  \item 这种系统具有一种专门设计用来校正行为的装置。例如本系统的反馈、知识发现、存储交换机制。
+%  \item 这种系统为了在不断变化的环境中维持自身的稳定，内部具有自动调节的机制，换言之，控制系统都是一种动态系统。本系统是一种动态的带有知识学习能力的动态系统。
+%\end{enumerate}
 \subsection{决策分类模块的理论分析}
 Saridis认为智能控制是数学与语言描述和用于系统与过程的算法之间的结合\cite{Saridis}。为了解决资源调度问题，希望在调度的时候能够带有数据挖掘和机器学习的能力。
 
@@ -138,32 +143,38 @@ P(x_i)=\sum_{j=1}^m P(x_i|h_j)P(h_j)
 P(h_1|x_i)=\frac{P(x_i|h_1)P(h_1)}{P(x_i)}
 \end{equation}
 
-贝叶斯定理允许为给定的一个数据值指定一个假设的概率值$P(h_j|x_i)$。在实际问题中，$x_i$可以是属性值，也可以是其它数据标签。$h_i$可以是属性值、属性值的集合（如范围），甚至是一些属性值的组合。
+贝叶斯定理允许为给定的一个数据值指定一个假设的概率值$P(h_j|x_i)$。在实际问题中，$x_i$可以是属性值，也可以是其它数据标签。$h_i$可以是属性值、属性值的集合（如范围），甚至是一些属性值的组合。正如文献\cite{KLR98}所讨论的，有三种方法可以解决分类问题，即指定边界、利用概率分布、利用后验概率。而贝叶斯分类恰好符合这些方法，从而可以合理的进行分类问题的解决。
+
+定义\ref{defclassification}给出了分类问题的定义。
+\begin{defn}
+\label{defclassification}
+给定一个由元组（条目，记录）组成的数据$D=\{t_1,t_2,\dots,t_n\}$和一个类别集合$C=\{C_1,C_2,\dots,C_m\}$，\textbf{分类问题}是指定一个映射$f:D\rightarrow C$，其中每个元组$t_i$被分配到一个类中，一个\textbf{类$C_j$}精确地包含了被映射到其中的元组，即$C_j$=$\{t_i|f(t_i)=C_j,1\leq i \leq n,且t_i\in D \}$。
+\end{defn}
 
 对一个目标元组进行分类时，需要利用从训练集中产生的条件概率和先验概率进行预测。这就需要将元组中不同的属性值对预测所起的作用组合起来。假设元组$t_i$有P个独立的属性值$\{x_{i1},x_{i2},\dots,x_{ip}\}$。对于每个类$C_j$和属性$x_{ik}$，由描述阶段可得到$P(x_{ik}|C_j)$，进而可以估计出$P(t_j|C_j)$，即
 \begin{equation}
 P(t_i|C_j)=\prod_{k=1}^p P(x_{ik}|C_j)
 \end{equation}
 
-下面是分类决策的伪代码：
+Algorithm\ref{alg:Bayes}和\ref{alg:Prob}是分类决策的伪代码：
 
 \begin{algorithm}[htb]                  %算法的开始
 \caption{贝叶斯分类算法}                %算法的标题
 \label{alg:Bayes}                       %给算法一个标签，这样方便在文中对算法的引用
 \begin{algorithmic}[1]                  %不知[1]是干嘛的？
 \REQUIRE ~~\\                           %算法的输入参数：Initialization
-    $X=\{x_1,x_2,\dots,x_n\}$   \hskip 30pt $\rhd$ 待分类项\\
-    $C=\{h_1,h_2,\dots,h_m\}$   \hskip 30pt $\rhd$ 已有类别
+    $X=\{x_1,x_2,\dots,x_n\}$   \hskip 36pt $\rhd$ 待分类项\\
+    $C=\{C_1,C_2,\dots,C_m\}$   \hskip 30pt $\rhd$ 已有类别
 \ENSURE ~~\\                           %算法的迭代：Iteration
     %Ensemble of classifiers on the current batch,  $E_n$;
-\WHILE    {$h_j$ and $j\leq m$}
-   \STATE Compute $P(h_j|x_i)$;
+\WHILE    {$C_j$ and $j\leq m$}
+   \STATE Compute $P(C_j|x_i)$;
 \ENDWHILE              %算法的返回值
-\IF{$P(h_k|X)$=max\{$P(h_1|X)$,$P(h_2|X)$,\dots,$P(h_m|X)$\}}
-            \STATE X$\in$ $h_k$;
+\IF{$P(C_k|X)$=max\{$P(C_1|X)$,$P(C_2|X)$,\dots,$P(C_m|X)$\}}
+            \STATE X$\in$ $C_k$;
 \ENDIF
 \lastcon ~~\\          %OUTPUT
-  X classified to $h_k$;  \hskip 30pt $\rhd$ 最大似然
+  X classified to $C_k$;  \hskip 30pt $\rhd$ 最大似然
 \end{algorithmic}
 \end{algorithm}
 
@@ -172,23 +183,23 @@ P(t_i|C_j)=\prod_{k=1}^p P(x_{ik}|C_j)
 \label{alg:Prob}                       %给算法一个标签，这样方便在文中对算法的引用
 \begin{algorithmic}[1]                  %不知[1]是干嘛的？
 \REQUIRE ~~\\                           %算法的输入参数：Initialization
-    $C=\{h_1,h_2,\dots,h_m\}$\hskip 30pt $\rhd$训练样本集
+    $C=\{C_1,C_2,\dots,C_m\}$\hskip 30pt $\rhd$训练样本集
 \ENSURE ~~\\                           %算法的迭代：Iteration
     %Ensemble of classifiers on the current batch,  $E_n$;
 \FORALL {$j\in m$}
 \FORALL {$i\in n$}
- \STATE Compute $P(x_i|h_j)$;
+ \STATE Compute $P(x_i|C_j)$;
 \ENDFOR
 \ENDFOR
 \lastcon ~~\\          %OUTPUT
-$P(h_i|X)$;
+$P(C_i|X)$;
 \end{algorithmic}
 \end{algorithm}
 
 对于一次决策过程，本文提出一个计算公式，来评价一次分配过程，为下一次产生评价因子，首先有如下定义：
 
 \begin{defn}
-已知已经产生的分类$C=\{c_1,c_2,\dots,c_n\}$，虚拟机编号为$V=\{v_1,v_2,\dots,v_m\}$，定义代价P作为评价标准，定义如下公式：
+已知已经产生的分类$C=\{C_1,C_2,\dots,C_n\}$，任务请求编号为$V=\{v_1,v_2,\dots,v_m\}$，定义代价P作为评价标准，定义如下公式：
 \end{defn}
 
 \begin{equation}
@@ -200,17 +211,19 @@ P=\frac{\sum\limits_{i=1}^m \sum\limits_{j=1}^n T(x_{ij})}{m}
 \begin{equation}
 T(x_{ij})=\left\{
 \begin{array}{ll}
-1,\quad v_j\hskip 10pt is\hskip 5pt in\hskip 5pt class\hskip 5pt i \\
-0,\quad others
+1,\quad v_j \ \ $属于类i$\\
+0,\quad $其它$
 \end{array}
 \right.
 \end{equation}
 
 P值越高代表着决策的正确率越高，如果分类的P值比若干次的值都高，则进行存储交换，用以产生更好的决策。
 
-由于监控器监控的数据有多种，比如CPU使用率、内存使用量、I/O带宽、网络带宽等等，所以为了使不同的量纲能够进行比较，就要做出适当的变换，将不同的数据映射到[0,1]区间内。本文采用平移极差变换，假设n个虚拟机，$R_i$表示第i个虚拟机的资源向量，$R_i$=$\{r_{i1},r_{i2},\dots,r_{in}\}$，变换方法如下：
+由于监控器监控的数据有多种，比如CPU使用率、内存使用量、I/O带宽、网络带宽、请求向量等等，所以为了使不同的量纲能够进行比较，就要做出适当的变换，将不同的数据映射到[0,1]区间内。本文采用平移极差变换，假设n个虚拟机，$R_i$表示第i 个虚拟机的资源向量，$R_i$=$\{r_{i1},r_{i2},\dots,r_{in}\}$，变换方法如下：
 \begin{equation}
-x_{ik}^\prime=\frac{x_{ik}-\min\limits_{1\leq i \leq n}\{x_{ik}\}}{\max\limits_{1\leq i \leq n}\{x_{ik}\}-\min\limits_{1\leq i \leq n}\{x_{ik}\}}
+r_{ik}^\prime=\frac{r_{ik}-\min\limits_{1\leq i \leq n}\{r_{ik}\}}{\max\limits_{1\leq i \leq n}\{r_{ik}\}-\min\limits_{1\leq i \leq n}\{r_{ik}\}}
 \end{equation}
+
+同理，任务请求的向量也使用平移极差变化得到归一化的值进行计算。
 \section{本章小结}
-本章分别从原型设计和原型分析两方面阐释了$MSPB^2C$的具体细节。第一部分首先从架构图介绍了本系统，并详细介绍了系统的工作流程，继而引出第二节对系统从理论上进行分析。第二节着重从数学方面对分类器和预测器进行了精确的分析，并给出了其工作的伪代码，深入阐述了其实现环节，最后给出了评价准则。
+本章分别从系统设计和系统分析两方面阐释了$BMVS^2$的具体细节。第一部分首先从架构图介绍了本系统，并详细介绍了系统的工作流程，继而引出第二节对系统从理论上进行分析。第二节着重从数学方面对分类器和预测器进行了精确的分析，并给出了其工作的伪代码，深入阐述了其实现环节，最后给出了评价准则。
